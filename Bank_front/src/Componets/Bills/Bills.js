@@ -519,7 +519,7 @@ export const Bills = () => {
           </Modal>
         </Tab>
         <Tab eventKey="profile" title="Prometi">
-          <h1>2</h1>
+          <div></div>
         </Tab>
       </Tabs>
     </Container>
