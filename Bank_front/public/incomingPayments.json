@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "date": "07.01.2022.",
+      "payer": "Maria Marić",
+      "amount":30
+    },
+    {
+        "date": "09.01.2022.",
+        "payer": "Mario MArić",
+        "amount":3000
+      },
+      {
+        "date": "05.05.2022.",
+        "payer": "Antonia Ježić",
+        "amount":3000
+      },
+      {
+        "date": "05.01.2022.",
+        "payer": "Ivan Marić",
+        "amount":3000
+      },
+      {
+        "date": "12.01.2022.",
+        "payer": "Poslodavac",
+        "amount":3000
+      }, {
+        "date": "05.01.2022.",
+        "payer": "Emanuel višić",
+        "amount":3000
+      }
+  ]
+}

@@ -1,0 +1,23 @@
+.layout {
+  display: flex;
+  margin: 0 auto;
+  max-height: 100vh;
+  // overflow: hidden;
+
+  &-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    top: 56px;
+    max-height: calc(100vh - 56px);
+    width: 100%;
+  }
+
+  &-content {
+    padding: 25px 15px 50px;
+    min-height: calc(100vh - 121px);
+    overflow: auto;
+    background-color: rgb(254, 255, 255);
+  }
+}
