@@ -170,7 +170,9 @@ export const Bills = () => {
 
         return (
           <div style={{ color: "green" }}>
-            <strong>{parseFloat(props.value).toFixed(2).replace(".", ",") + " kn"}</strong>
+            <strong>
+              {parseFloat(props.value).toFixed(2).replace(".", ",") + " kn"}
+            </strong>
           </div>
         );
       },
@@ -202,13 +204,17 @@ export const Bills = () => {
         setSumOutcome(parseFloat(calculatedSumOutcome).toFixed(2));
         return (
           <div style={{ color: "red" }}>
-            <strong>{"-" + parseFloat(props.value).toFixed(2).replace(".", ",") + " kn"}</strong>
+            <strong>
+              {"-" +
+                parseFloat(props.value).toFixed(2).replace(".", ",") +
+                " kn"}
+            </strong>
           </div>
         );
       },
     },
   ]);
-  
+
   const handleSubmitIncome = (values) => {
     saveDataIncome(values);
   };
@@ -221,12 +227,14 @@ export const Bills = () => {
     pushToArrayIncome(data);
     setTableData((arr) => [...arr, data]);
     calculateIncomingPayment(data);
+    handleCloseModal();
   };
 
   const saveDataOutcome = (data) => {
     pushToArrayOutcome(data);
     setTableData2((arr2) => [...arr2, data]);
     calculateOutgoingPayment(data);
+    handleCloseModal();
   };
 
   const getValidationSchema = () => {
@@ -235,15 +243,12 @@ export const Bills = () => {
       payer: Yup.string()
         .required("Obavezno polje")
         .matches(
-          /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g,
-          "Polje može sadržavati samo latinske znakove."
-        )
-        .matches(
-          /^(?:([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)) (?:([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*))$/g,
-          "Unesite svoje ime i prezime."
+          /^[a-zA-ZČčĆćŠšĐđŽž]{1,}(?: [a-zA-ZČčĆćŠšĐđŽž]{1,})+$/,
+
+          "Obvezni podaci su ime i prezime, a dozvoljena samo slova!"
         ),
       amount: Yup.number()
-        .required("ERROR: The number is required!")
+        .required("Upišite običan ili decimalni broj!")
         .test(
           "Is positive?",
           "Iznos ne smije biti negativan",
@@ -283,9 +288,13 @@ export const Bills = () => {
 
                   <Card.Text>HR12345575874849</Card.Text>
                   <br />
-                  <Card.Title>{`${parseFloat(accountBallance).toFixed(2).replace(".", ",")} HRK`}</Card.Title>
+                  <Card.Title>{`${parseFloat(accountBallance)
+                    .toFixed(2)
+                    .replace(".", ",")} HRK`}</Card.Title>
 
-                  <Card.Text>{`Raspoloživo ${parseFloat(remainingBallance).toFixed(2).replace(".", ",")} HRK`}</Card.Text>
+                  <Card.Text>{`Raspoloživo ${parseFloat(remainingBallance)
+                    .toFixed(2)
+                    .replace(".", ",")} HRK`}</Card.Text>
                 </Card.Body>
               </Card>
               <Card
@@ -302,9 +311,13 @@ export const Bills = () => {
 
                   <Card.Text>HR12345575874849</Card.Text>
                   <br />
-                  <Card.Title>{`${parseFloat(50000).toFixed(2).replace(".", ",")} HRK`}</Card.Title>
+                  <Card.Title>{`${parseFloat(50000)
+                    .toFixed(2)
+                    .replace(".", ",")} HRK`}</Card.Title>
 
-                  <Card.Text>{`${parseFloat(4000).toFixed(2).replace(".", ",")} HRK`}</Card.Text>
+                  <Card.Text>{`${parseFloat(4000)
+                    .toFixed(2)
+                    .replace(".", ",")} HRK`}</Card.Text>
                 </Card.Body>
               </Card>
             </div>
@@ -342,7 +355,7 @@ export const Bills = () => {
             >
               <Tab eventKey="uplate" title="Uplate">
                 <Formik
-                  enableReinitialize={false}
+                  enableReinitialize={true}
                   initialValues={{ date: new Date(), payer: "", amount: "" }}
                   validationSchema={getValidationSchema()}
                   onSubmit={(values) => handleSubmitIncome(values)}
@@ -350,7 +363,7 @@ export const Bills = () => {
                   {({ errors, touched, values, setFieldValue }) => (
                     <Form>
                       <Modal.Header closeButton>
-                        <Modal.Title></Modal.Title>
+                        <Modal.Title>{"Uplate"}</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                         <Container fluid>
@@ -423,7 +436,7 @@ export const Bills = () => {
               </Tab>
               <Tab eventKey="isplate" title="Isplate">
                 <Formik
-                  enableReinitialize={false}
+                  enableReinitialize={true}
                   initialValues={{ date: new Date(), payer: "", amount: "" }}
                   validationSchema={getValidationSchema()}
                   onSubmit={(values) => handleSubmitOutcome(values)}
